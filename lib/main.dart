@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import 'package:githubblogapp/custom_icon_icons.dart';
@@ -8,12 +10,13 @@ import 'pages/HomePage.dart';
 import 'pages/NewsPage.dart';
 import 'pages/RepoPage.dart';
 import 'states/providers.dart';
+import 'wigets/UtilWidget.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MainApp());
 }
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -22,8 +25,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'blog app',
+        debugShowCheckedModeBanner: false,
+        scrollBehavior: DeskScrollBehavior(),
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          primarySwatch: Colors.grey,
         ),
         home: MainPage(),
       ),
@@ -111,14 +116,4 @@ class _MainPageState extends State<MainPage> {
       c.fnPage2_setMesageInfo("현재 선택된 상태에서 click함.");
     }
   }
-}
-
-class BlankAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-
-  @override
-  Size get preferredSize => Size(0.0, 0.0);
 }
