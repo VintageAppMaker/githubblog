@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
+import 'package:githubblogapp/custom_icon_icons.dart';
 import 'package:githubblogapp/states/providers.dart';
 import 'package:githubblogapp/wigets/UtilWidget.dart';
 import "package:provider/provider.dart";
+import 'package:url_launcher/url_launcher.dart';
+import 'package:githubblogapp/Util.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,13 +14,14 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+class HomePageState extends State<HomePage> {
   final _pageController = PageController(viewportFraction: 1);
   int _index = 0;
+  List<RssTiStory> lstTiStory = [];
 
   Widget _buildPageView() {
     return Container(
-      color: Colors.grey,
+      color: Colors.black,
       height: 100,
       child: PageView.builder(
           itemCount: 10,
@@ -39,88 +43,226 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   }
 
   Container _buildGridView() {
+    String getUrl(int n) {
+      return lstTiStory[n % lstTiStory.length].thumbnail;
+    }
+
+    String getTitle(int n) {
+      return lstTiStory[n % lstTiStory.length].title;
+    }
+
+    String getLink(int n) {
+      return lstTiStory[n % lstTiStory.length].link;
+    }
+
     return Container(
-      child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 5,
-          ),
-          itemCount: 10,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            var url = (index % 2 == 0)
-                ? "https://lh3.googleusercontent.com/GTmuiIZrppouc6hhdWiocybtRx1Tpbl52eYw4l-nAqHtHd4BpSMEqe-vGv7ZFiaHhG_l4v2m5Fdhapxw9aFLf28ErztHEv5WYIz5fA"
-                : "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9e5d9e8e-4b0d-4f3f-9580-baf556faad5c%2Fios-logo.jpg&blockId=d983bdda-9a22-4eab-998b-9a0ff3f8ec73&width=2400";
-            return Container(child: Image.network(url));
+      child: FutureBuilder(
+          future: getData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(
+                      child: Text(
+                "🚀loading Error",
+                style: TextStyle(fontSize: 40, color: Colors.amber),
+              )));
+
+            // 초기화 및 데이터저장
+            lstTiStory.clear();
+            lstTiStory.addAll(snapshot.data);
+
+            return GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemCount: lstTiStory.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  var url = getUrl(index);
+                  return GestureDetector(
+                    onTap: (){
+                      var url = Uri.parse(getLink(index));
+                      launchUrl(url);
+                    },
+                    child: Card(
+                        child: Container(
+                            child: (url.trim() == "")
+                                ? Container(
+                                    padding: EdgeInsets.all(16),
+                                    child: Center(
+                                      child: Text("${getTitle(index)}"),
+                                    ),
+                                  )
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                          flex: 7,
+                                          child: Container(
+                                              width: double.infinity,
+                                              child: Image.network(
+                                                url,
+                                                fit: BoxFit.fitWidth,
+                                              ))),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 8, right: 8),
+                                              child: Center(
+                                                  child: Text(
+                                                "${getTitle(index)}",
+                                                overflow: TextOverflow.fade,
+                                                maxLines: 1,
+                                                softWrap: false,
+                                                style: TextStyle(fontSize: 14),
+                                              ))))
+                                    ],
+                                  ))),
+                  );
+                });
           }),
     );
   }
 
-  Widget _buildHeader(String s, [Color c = Colors.white]) {
+  Widget _buildHeader() {
     return Container(
         width: double.infinity,
-        height: 100,
-        color: c,
+        padding: EdgeInsets.all(18),
+        color: Colors.black,
         child: Center(
-            child: Text(
-          s,
-          style: TextStyle(fontSize: 20, color: Colors.grey),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.app_registration,
+                    color: Colors.green,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text("10",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.green,
+                      ))
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.note,
+                    color: Colors.green,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text("10",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.green,
+                      ))
+                ],
+              ),
+            )
+          ],
+        )));
+  }
+
+  Widget _buildGithubButton() {
+    return ActionChip(
+        elevation: 4.0,
+        padding: EdgeInsets.all(4.0),
+        avatar: CircleAvatar(
+          backgroundColor: Colors.green,
+          child: Icon(
+            CustomIcon.github_icon,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+        label: Text(
+          'github',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          var url = Uri.parse("https://github.com/VintageAppMaker/");
+          launchUrl(url);
+        },
+        backgroundColor: Colors.green,
+        shape: StadiumBorder(
+            side: BorderSide(
+          width: 1,
+          color: Colors.green,
         )));
   }
 
   Widget _buildCard() {
     String sMessage =
         " S/W Development \n Consulting\n Education\n Tech Writer";
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        color: Color.fromARGB(255, 117, 117, 116),
-        elevation: 10,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            "https://avatars.githubusercontent.com/u/31234716?v=4"),
-                        fit: BoxFit.scaleDown)),
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          color: Colors.transparent,
+          elevation: 10,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "https://avatars.githubusercontent.com/u/31234716?v=4"),
+                          fit: BoxFit.scaleDown)),
+                ),
+                title: Text('Vintage appMaker',
+                    style: TextStyle(color: Colors.white, fontSize: 30)),
+                subtitle: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(sMessage, style: TextStyle(color: Colors.grey)),
+                    ],
+                  ),
+                ),
               ),
-              title: Text('Vintage appMaker',
-                  style: TextStyle(color: Colors.white, fontSize: 30)),
-              subtitle: Text(sMessage, style: TextStyle(color: Colors.grey)),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.all(8),
-              width: double.infinity,
-              child: Text("http://vintageappmaker.com",
-                  textAlign: TextAlign.right,
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
-            )
-          ],
-        ));
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.all(8),
+                width: double.infinity,
+                child: _buildGithubButton(),
+              )
+            ],
+          )),
+    );
   }
 
   late List<Widget> widgetList1;
 
   @override
-  void initState() {
-    widgetList1 = [
-      _buildHeader("+Grid뷰"),
-      _buildGridView(),
-      _buildHeader("+Page뷰"),
-      for (var i = 0; i < 10; i++) _buildPageView(),
-    ];
+  initState() {
     super.initState();
   }
 
@@ -128,60 +270,95 @@ class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: BlankAppBar(),
-        body: Container(
-          color: Colors.grey,
-          child: CustomScrollView(
-            slivers: <Widget>[
-              // 첫번째 Header
-              SliverAppBar(
-                pinned: false,
-                expandedHeight: MediaQuery.of(context).size.height / 3,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text('', style: TextStyle(fontSize: 18)),
-                  background: Image.network(
-                      fit: BoxFit.cover,
-                      "https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_960_720.jpg"),
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        _buildCard(),
-                      ],
-                    ),
-                  );
-                }, childCount: 1),
-              ),
-
-              // 두번째 해더
-              SliverAppBar(
-                pinned: true,
-                title: ListTile(
-                  leading: Text("🍕",
-                      style: TextStyle(fontSize: 20, color: Colors.white)),
-                  title: Text(
-                    "고정된 SliverAppBar",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => widgetList1[index],
-                    childCount: widgetList1.length),
-              ),
-            ],
-          ),
-        ));
+        body: LayoutBuilder(builder: ((context, constraints) {
+          return _buildHomePage(context);
+        })));
   }
 
-  @override
-  bool get wantKeepAlive => true;
+  Future<List<RssTiStory>> getData() async {
+    // 통신
+    var data = await Util.getTistory();
+    var lst = <RssTiStory>[];
+    data.items?.forEach((element) {
+      lst.add(RssTiStory(
+          title: element.title ?? "",
+          thumbnail: Util.extractUrl(element.description.toString()),
+          link: element.link ?? ""
+      ));
+    });
+
+    return lst;
+  }
+
+  Container _buildHomePage(BuildContext context) {
+    // initState()에는 되도록 초기화 하지말자
+    widgetList1 = [
+      _buildGridView(),
+      _buildPageView(),
+    ];
+
+    return Container(
+      color: Colors.black,
+      child: CustomScrollView(
+        slivers: <Widget>[
+          // 첫번째 Header
+          _buildSliverAppbar(context),
+          SliverList(
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _buildCard(),
+                  ],
+                ),
+              );
+            }, childCount: 1),
+          ),
+
+          // 두번째 해더
+          SliverAppBar(
+            pinned: true,
+            flexibleSpace: _buildHeader(),
+            backgroundColor: Colors.black,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                (context, index) => widgetList1[index],
+                childCount: widgetList1.length),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar _buildSliverAppbar(BuildContext context) {
+    var h = MediaQuery.of(context).size.height / 3;
+    var w = MediaQuery.of(context).size.width / 3;
+    h = (w > h) ? h * 2 : h;
+    return SliverAppBar(
+      elevation: 3.0,
+      pinned: false,
+      expandedHeight: h,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text('', style: TextStyle(fontSize: 18)),
+        background: Image.network(
+            fit: BoxFit.cover,
+            "https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_960_720.jpg"),
+      ),
+    );
+  }
+}
+
+// ----------------------------------------
+class RssTiStory {
+  late String title;
+  late String thumbnail;
+  late String link;
+
+  RssTiStory({required this.title, required this.thumbnail, this.link = ""});
 }
