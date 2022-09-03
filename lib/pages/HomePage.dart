@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import 'package:githubblogapp/custom_icon_icons.dart';
-import 'package:githubblogapp/states/providers.dart';
+import 'package:githubblogapp/data/HomePageData.dart';
+import 'package:githubblogapp/server/api.dart';
+import 'package:githubblogapp/wigets/CustomWidgets.dart';
 import 'package:githubblogapp/wigets/UtilWidget.dart';
-import "package:provider/provider.dart";
 import 'package:url_launcher/url_launcher.dart';
 import 'package:githubblogapp/Util.dart';
 
@@ -15,30 +16,106 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final _pageController = PageController(viewportFraction: 1);
+  final _pageController = PageController(viewportFraction: 0.9, initialPage: 0);
   int _index = 0;
-  List<RssTiStory> lstTiStory = [];
+
+  List<RssTiStory>  lstTiStory  = [];
+  List<RssTumblr>   lstTumblr   = [];
+  List<AtomYoutube> lstYoutube  = [];
+
+  late List<Widget> widgetList1;
+  late List<Widget> widgetList2;
+  late List<Widget> widgetList3;
+
+  final ValueNotifier<int> tistoryCount  = ValueNotifier<int>(0);
+  final ValueNotifier<int> youtubeCount  = ValueNotifier<int>(0);
+  final ValueNotifier<int> tumblrCount   = ValueNotifier<int>(0);
+
+  Widget _buildAppAvatarList(){
+    var lst = <Widget>[
+      buildAvatar("https://play-lh.googleusercontent.com/XrizX1_DQvPyXwWkyJEgZwC7f8P8vRzq3l8c6yd32VZVcpQ423Wb-y0s0pCe8q3F1eP8=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/1WxLS_Mgb6IUMrfkbJ1gBVhiL4_CG2sSCl0UecUSXsolyPQz6jEV51BuLKnKdlPx9rI=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/QoNk1z5drgx2aFmZr_rUO12d4e1JoxDtZ3ox12eJxo65FCAViSEmuH8IVuDUg7NYcENM=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/_KQmCFqljdTLe51CzWaE4d64jBLapkdF7hsthymCFYMlt3UtIR1HX3tGXj-QYg_eOw=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/6WW-nmZQ_MTkALEVT9HAFg-jRHitSdWIcxWHeS2Lak_TWL0VibRlnZjM2MLJ71fqlO8=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/bk7RMkKMcPuv4OU_gc1iTW4fuOK4tBfW970xHdMArLInAxgvBtri_bvCljb1a5eEfA=w240-h480-rw"),
+      buildAvatar("https://play-lh.googleusercontent.com/vS48CuRkPP92bF-CmaAwovmj7PTgKMjWG0b4sC4_PIcEgvopyIoaGI8GePv7TAiHaw=s64-rw")
+    ];
+    return Container(width: double.infinity, child: Center(child: buildHorizontalAvatarList(lst)));
+  }
 
   Widget _buildPageView() {
-    return Container(
-      color: Colors.black,
-      height: 100,
-      child: PageView.builder(
-          itemCount: 10,
-          controller: _pageController,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: (index % 2 == 0)
-                    ? Color.fromARGB(255, 196, 15, 15)
-                    : Color.fromARGB(255, 73, 73, 72),
-                child: SizedBox(
-                    width: 100, child: Center(child: Text("${_index}"))),
-              ),
-            );
+
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Container(
+        color: Colors.black,
+        child: FutureBuilder(
+          future: _getYoutubeData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(
+                      child: Text(
+                        "🚀loading Error",
+                        style: TextStyle(fontSize: 40, color: Colors.amber),
+                      )));
+
+            // 초기화 및 데이터저장
+            lstYoutube.clear();
+            lstYoutube.addAll(snapshot.data);
+
+            return PageView.builder(
+                itemCount: lstYoutube.length,
+                controller: _pageController,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        var url = Uri.parse(lstYoutube[index].link);
+                        launchUrl(url);
+                      },
+                      child: Container(
+                        color: Colors.white,
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Expanded(
+                              flex: 7,
+                              child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.all(8),
+                                  width: double.infinity,
+                                  child: Image.network(
+                                    "${lstYoutube[index].thumbnail}",
+                                    fit: BoxFit.fitWidth,
+                                  ))),
+                          Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: Colors.white,
+                                  padding: EdgeInsets.only(
+                                      left: 8, right: 8),
+                                  child: Center(
+                                      child: Text(
+                                        "${lstYoutube[index].title}",
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        softWrap: false,
+                                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                                      ))))
+                        ],),
+                      ),
+                    ),
+                  );
+                },
+                onPageChanged: (int index) => setState(() => _index = index));
+
           },
-          onPageChanged: (int index) => setState(() => _index = index)),
+      )),
     );
   }
 
@@ -57,7 +134,7 @@ class HomePageState extends State<HomePage> {
 
     return Container(
       child: FutureBuilder(
-          future: getData(),
+          future: _getTistoryData(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData == false)
               return Container(
@@ -83,7 +160,7 @@ class HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   var url = getUrl(index);
                   return GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       var url = Uri.parse(getLink(index));
                       launchUrl(url);
                     },
@@ -103,10 +180,12 @@ class HomePageState extends State<HomePage> {
                                           flex: 7,
                                           child: Container(
                                               width: double.infinity,
-                                              child: Image.network(
-                                                url,
-                                                fit: BoxFit.fitWidth,
-                                              ))),
+                                              child: buildBWWidget(
+                                                  child: Image.network(
+                                                    url,
+                                                    fit: BoxFit.fitWidth,
+                                                  ),
+                                                  spec: index % 2))),
                                       Expanded(
                                           flex: 1,
                                           child: Container(
@@ -128,55 +207,176 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  Container _buildGridView2() {
+    String getUrl(int n) {
+      return lstTumblr[n % lstTiStory.length].thumbnail;
+    }
+
+    String getLink(int n) {
+      return lstTumblr[n % lstTiStory.length].link;
+    }
+
+    return Container(
+      child: FutureBuilder(
+          future: _getTumblrData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(child: CircularProgressIndicator()));
+            if (snapshot.hasData == false)
+              return Container(
+                  child: Center(
+                      child: Text(
+                        "🚀loading Error",
+                        style: TextStyle(fontSize: 40, color: Colors.amber),
+                      )));
+
+            // 초기화 및 데이터저장
+            lstTumblr.clear();
+            lstTumblr.addAll(snapshot.data);
+
+            return GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemCount: lstTumblr.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  var url = getUrl(index);
+                  return GestureDetector(
+                    onTap: () {
+                      var url = Uri.parse(getLink(index));
+                      launchUrl(url);
+                    },
+                    child: Card(
+                        child: Container(
+                            child: (url.trim() == "")
+                                ? Container(
+                              padding: EdgeInsets.all(16),
+                              child: Center(
+                                child: Text(""),
+                              ),
+                            )
+                                : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                    width: double.infinity,
+                                    child: Image.network(
+                                      url,
+                                      fit: BoxFit.fitWidth,
+                                    ))
+                              ],
+                            ))),
+                  );
+                });
+          }),
+    );
+  }
+
   Widget _buildHeader() {
     return Container(
         width: double.infinity,
         padding: EdgeInsets.all(18),
         color: Colors.black,
-        child: Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: [
-            Expanded(
-              flex: 1,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.app_registration,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text("10",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.green,
-                      ))
-                ],
-              ),
+            Icon(
+              Icons.app_registration,
+              color: Colors.white,
             ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.note,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text("10",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.green,
-                      ))
-                ],
-              ),
-            )
+            SizedBox(
+              width: 4,
+            ),
+            ValueListenableBuilder(
+              valueListenable: tistoryCount,
+              builder: (c, value, child){
+                return Text("${value}",
+                style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                ));
+              },
+
+            ),
+            SizedBox(
+              width: 4,
+            ),
+            Align(alignment: Alignment.bottomCenter, child: Text("- tistory", style: TextStyle(fontSize: 11, color: Colors.grey),))
           ],
-        )));
+        ));
+  }
+
+  Widget _buildHeader2() {
+    return Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(18),
+        color: Colors.black,
+        child: Row(
+          children: [
+            Icon(
+              Icons.video_label,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 4,
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: youtubeCount,
+              builder: (c, value, child){
+                return Text("${value}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ));
+              },
+
+            ),
+
+            SizedBox(
+              width: 4,
+            ),
+            Align(alignment: Alignment.bottomCenter, child: Text("- youtube", style: TextStyle(fontSize: 11, color: Colors.grey),))
+
+          ],
+        ));
+  }
+
+  Widget _buildHeader3() {
+    return Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(18),
+        color: Colors.black,
+        child: Row(
+          children: [
+            Icon(
+              Icons.format_paint,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 4,
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: tumblrCount,
+              builder: (c, value, child){
+                return Text("${value}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ));
+              },
+
+            ),
+
+            SizedBox(
+              width: 4,
+            ),
+            Align(alignment: Alignment.bottomCenter, child: Text("- tumblr", style: TextStyle(fontSize: 11, color: Colors.grey),))
+
+          ],
+        ));
   }
 
   Widget _buildGithubButton() {
@@ -184,32 +384,38 @@ class HomePageState extends State<HomePage> {
         elevation: 4.0,
         padding: EdgeInsets.all(4.0),
         avatar: CircleAvatar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.white,
           child: Icon(
             CustomIcon.github_icon,
-            color: Colors.white,
+            color: Colors.black,
             size: 20,
           ),
         ),
-        label: Text(
-          'github',
-          style: TextStyle(color: Colors.white),
+        label: Container(
+          alignment: Alignment.center,
+          width: 50,
+          child: Center(
+            child: Text(
+              'github',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
         ),
         onPressed: () {
           var url = Uri.parse("https://github.com/VintageAppMaker/");
           launchUrl(url);
         },
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.white,
         shape: StadiumBorder(
             side: BorderSide(
-          width: 1,
-          color: Colors.green,
+          width: 0,
+          color: Colors.grey,
         )));
   }
 
   Widget _buildCard() {
     String sMessage =
-        " S/W Development \n Consulting\n Education\n Tech Writer";
+        " S/W Development \n Consulting\n Education\n Tech Writing";
     return Container(
       padding: EdgeInsets.all(8.0),
       child: Card(
@@ -253,13 +459,14 @@ class HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(8),
                 width: double.infinity,
                 child: _buildGithubButton(),
-              )
+              ),
+
+              _buildAppAvatarList()
             ],
           )),
     );
   }
 
-  late List<Widget> widgetList1;
 
   @override
   initState() {
@@ -275,26 +482,62 @@ class HomePageState extends State<HomePage> {
         })));
   }
 
-  Future<List<RssTiStory>> getData() async {
+  Future<List<RssTiStory>> _getTistoryData() async {
     // 통신
-    var data = await Util.getTistory();
+    var data = await API.getTistory();
     var lst = <RssTiStory>[];
     data.items?.forEach((element) {
       lst.add(RssTiStory(
           title: element.title ?? "",
           thumbnail: Util.extractUrl(element.description.toString()),
-          link: element.link ?? ""
-      ));
+          link: element.link ?? ""));
     });
 
+    tistoryCount.value = lst.length;
+    return lst;
+  }
+
+  Future<List<RssTumblr>> _getTumblrData() async {
+    // 통신
+    var data = await API.getTumblr();
+    var lst = <RssTumblr>[];
+
+    data.items?.forEach((element) {
+      lst.add(RssTumblr(
+          thumbnail: Util.extractUrl(element.description.toString()),
+          link: element.link ?? ""));
+    });
+
+    tumblrCount.value = lst.length;
+    return lst;
+  }
+
+  Future<List<AtomYoutube>> _getYoutubeData() async {
+    var atomes = await API.getYoutube();
+    var lst = <AtomYoutube>[];
+
+    atomes.items?.forEach((element) {
+      lst.add(AtomYoutube(
+          title: element.title ?? "",
+          thumbnail: Util.getYoutubeThumbnail(element.links?[0].href ?? "") ?? "",
+          link: element.links?[0].href ?? ""));
+    });
+
+    youtubeCount.value = lst.length;
     return lst;
   }
 
   Container _buildHomePage(BuildContext context) {
-    // initState()에는 되도록 초기화 하지말자
     widgetList1 = [
-      _buildGridView(),
+      _buildGridView()
+    ];
+
+    widgetList2 = [
       _buildPageView(),
+    ];
+
+    widgetList3 = [
+      _buildGridView2(),
     ];
 
     return Container(
@@ -331,6 +574,32 @@ class HomePageState extends State<HomePage> {
                 (context, index) => widgetList1[index],
                 childCount: widgetList1.length),
           ),
+
+          // 두번째 해더
+          SliverAppBar(
+            pinned: true,
+            flexibleSpace: _buildHeader2(),
+            backgroundColor: Colors.black,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                    (context, index) => widgetList2[index],
+                childCount: widgetList2.length),
+          ),
+
+          // 세번째 해더
+          SliverAppBar(
+            pinned: true,
+            flexibleSpace: _buildHeader3(),
+            backgroundColor: Colors.black,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                    (context, index) => widgetList3[index],
+                childCount: widgetList3.length),
+          )
+
+
         ],
       ),
     );
@@ -348,17 +617,8 @@ class HomePageState extends State<HomePage> {
         title: Text('', style: TextStyle(fontSize: 18)),
         background: Image.network(
             fit: BoxFit.cover,
-            "https://cdn.pixabay.com/photo/2018/01/11/21/27/desk-3076954_960_720.jpg"),
+            "https://cdn.pixabay.com/photo/2020/09/27/13/15/data-5606639_960_720.jpg"),
       ),
     );
   }
-}
-
-// ----------------------------------------
-class RssTiStory {
-  late String title;
-  late String thumbnail;
-  late String link;
-
-  RssTiStory({required this.title, required this.thumbnail, this.link = ""});
 }

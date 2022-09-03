@@ -5,7 +5,7 @@ import "package:flutter/widgets.dart";
 import 'package:githubblogapp/custom_icon_icons.dart';
 import "package:provider/provider.dart";
 
-import 'pages/BlogPage.dart';
+import 'pages/AboutPage.dart';
 import 'pages/HomePage.dart';
 import 'pages/NewsPage.dart';
 import 'pages/RepoPage.dart';
@@ -52,7 +52,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    _items = [HomePage(), RepoPage(), NewsPage(), BlogPage()];
+    _items = [HomePage(), RepoPage(), NewsPage(), AboutPage()];
   }
 
   int _selectedIndex = 0;
@@ -96,8 +96,8 @@ class _MainPageState extends State<MainPage> {
               label: 'news',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book_rounded),
-              label: 'blog',
+              icon: Icon(Icons.person),
+              label: 'about',
             )
           ],
           currentIndex: _param.value,

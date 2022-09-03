@@ -3,14 +3,14 @@ import "package:flutter/widgets.dart";
 import 'package:githubblogapp/states/providers.dart';
 import "package:provider/provider.dart";
 
-class BlogPage extends StatefulWidget {
+class AboutPage extends StatefulWidget {
   @override
-  BlogPageState createState() {
-    return BlogPageState();
+  AboutPageState createState() {
+    return AboutPageState();
   }
 }
 
-class BlogPageState extends State<BlogPage> with AutomaticKeepAliveClientMixin {
+class AboutPageState extends State<AboutPage> with AutomaticKeepAliveClientMixin {
   late GestureDetector gestureDetector;
 
   // Setting to true will force the tab to never be disposed. This could be dangerous.
