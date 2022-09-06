@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:webfeed/webfeed.dart';
 
-class API{
+class RSSApi{
   static Future<RssFeed> getTistory() async {
     var dio = Dio();
     final sData = await dio.get('https://vintageappmaker.tistory.com/rss');

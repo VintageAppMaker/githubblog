@@ -64,3 +64,39 @@ Widget buildBWWidget({required Widget child, int spec = 0}) {
     child: child,
   );
 }
+
+// progress 보이기
+Widget showProgress() =>Center(child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [CircularProgressIndicator()]));
+
+// 계정입력 input dialog
+Future<void> askAccountDialog(BuildContext context, Function onChanged, Function onCancel, Function onOk ) async {
+  TextEditingController _textFieldController = TextEditingController();
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('account'),
+          content: TextField(
+            onChanged: (value) {
+              onChanged(value);
+            },
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "🔔 please enter github account"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('CANCEL', style: TextStyle(color: Colors.red),),
+              onPressed: () {
+                onCancel();
+              },
+            ),
+            TextButton(
+              child: Text('OK', style: TextStyle(color: Colors.black),),
+              onPressed: () {
+                onOk();
+              },
+            ),
+          ],
+        );
+      });
+}

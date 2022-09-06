@@ -2,9 +2,10 @@ import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import 'package:githubblogapp/custom_icon_icons.dart';
 import 'package:githubblogapp/data/HomePageData.dart';
-import 'package:githubblogapp/server/api.dart';
+import 'package:githubblogapp/server/RSSApi.dart';
 import 'package:githubblogapp/wigets/CustomWidgets.dart';
 import 'package:githubblogapp/wigets/UtilWidget.dart';
+import 'package:githubblogapp/wigets/timeline.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:githubblogapp/Util.dart';
 
@@ -32,7 +33,8 @@ class HomePageState extends State<HomePage> {
   final ValueNotifier<int> tumblrCount   = ValueNotifier<int>(0);
 
   Widget _buildAppAvatarList(){
-    var lst = <Widget>[
+
+    var lstAvatar = <Widget>[
       buildAvatar("https://play-lh.googleusercontent.com/XrizX1_DQvPyXwWkyJEgZwC7f8P8vRzq3l8c6yd32VZVcpQ423Wb-y0s0pCe8q3F1eP8=w240-h480-rw"),
       buildAvatar("https://play-lh.googleusercontent.com/1WxLS_Mgb6IUMrfkbJ1gBVhiL4_CG2sSCl0UecUSXsolyPQz6jEV51BuLKnKdlPx9rI=w240-h480-rw"),
       buildAvatar("https://play-lh.googleusercontent.com/QoNk1z5drgx2aFmZr_rUO12d4e1JoxDtZ3ox12eJxo65FCAViSEmuH8IVuDUg7NYcENM=w240-h480-rw"),
@@ -41,7 +43,34 @@ class HomePageState extends State<HomePage> {
       buildAvatar("https://play-lh.googleusercontent.com/bk7RMkKMcPuv4OU_gc1iTW4fuOK4tBfW970xHdMArLInAxgvBtri_bvCljb1a5eEfA=w240-h480-rw"),
       buildAvatar("https://play-lh.googleusercontent.com/vS48CuRkPP92bF-CmaAwovmj7PTgKMjWG0b4sC4_PIcEgvopyIoaGI8GePv7TAiHaw=s64-rw")
     ];
-    return Container(width: double.infinity, child: Center(child: buildHorizontalAvatarList(lst)));
+
+    var lstAvatarDesc = <String>[
+      "통화노트",
+      "crazy 모닝콜",
+      "battery history",
+      "shorcut launcher",
+      "kotlin 배우기 - github",
+      "외주개발이야기",
+      "누구나 쉬운 산수 +-"
+    ];
+
+    var children = <TimelineItem>[];
+    var indx = 0;
+    lstAvatar.forEach((element) {
+      children.add(TimelineItem(child: Text(lstAvatarDesc[indx], style: TextStyle(color: Colors.white),), indicator: element));
+      indx++;
+    });
+
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: Container(
+            padding: EdgeInsets.all(5),
+            color: Color(0x1AFFFFF0),
+            child: Timeline(children: children, lineColor: Colors.white,)),
+      ),
+    );
   }
 
   Widget _buildPageView() {
@@ -77,8 +106,7 @@ class HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: (){
-                        var url = Uri.parse(lstYoutube[index].link);
-                        launchUrl(url);
+                        Util.shareUrl(lstYoutube[index].link);
                       },
                       child: Container(
                         color: Colors.white,
@@ -161,8 +189,7 @@ class HomePageState extends State<HomePage> {
                   var url = getUrl(index);
                   return GestureDetector(
                     onTap: () {
-                      var url = Uri.parse(getLink(index));
-                      launchUrl(url);
+                      Util.shareUrl(getLink(index));
                     },
                     child: Card(
                         child: Container(
@@ -245,8 +272,7 @@ class HomePageState extends State<HomePage> {
                   var url = getUrl(index);
                   return GestureDetector(
                     onTap: () {
-                      var url = Uri.parse(getLink(index));
-                      launchUrl(url);
+                      Util.shareUrl(getLink(index));
                     },
                     child: Card(
                         child: Container(
@@ -402,8 +428,7 @@ class HomePageState extends State<HomePage> {
           ),
         ),
         onPressed: () {
-          var url = Uri.parse("https://github.com/VintageAppMaker/");
-          launchUrl(url);
+          Util.shareUrl("https://github.com/VintageAppMaker/");
         },
         backgroundColor: Colors.white,
         shape: StadiumBorder(
@@ -461,6 +486,10 @@ class HomePageState extends State<HomePage> {
                 child: _buildGithubButton(),
               ),
 
+              SizedBox(
+                height: 10,
+              ),
+
               _buildAppAvatarList()
             ],
           )),
@@ -484,7 +513,7 @@ class HomePageState extends State<HomePage> {
 
   Future<List<RssTiStory>> _getTistoryData() async {
     // 통신
-    var data = await API.getTistory();
+    var data = await RSSApi.getTistory();
     var lst = <RssTiStory>[];
     data.items?.forEach((element) {
       lst.add(RssTiStory(
@@ -499,7 +528,7 @@ class HomePageState extends State<HomePage> {
 
   Future<List<RssTumblr>> _getTumblrData() async {
     // 통신
-    var data = await API.getTumblr();
+    var data = await RSSApi.getTumblr();
     var lst = <RssTumblr>[];
 
     data.items?.forEach((element) {
@@ -513,7 +542,7 @@ class HomePageState extends State<HomePage> {
   }
 
   Future<List<AtomYoutube>> _getYoutubeData() async {
-    var atomes = await API.getYoutube();
+    var atomes = await RSSApi.getYoutube();
     var lst = <AtomYoutube>[];
 
     atomes.items?.forEach((element) {

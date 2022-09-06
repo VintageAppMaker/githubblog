@@ -1,7 +1,7 @@
 import 'package:html/parser.dart' show parse;
+import 'package:url_launcher/url_launcher.dart';
 
 class Util {
-
 
   static String extractUrl(String s){
       var doc = parse(s);
@@ -19,6 +19,20 @@ class Util {
       return null;
     }
     return 'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg';
+  }
+
+  // 공유하기
+  static void shareUrl(String sUrl) async {
+    final Uri _url = Uri.parse(sUrl);
+    if (!await launchUrl(_url)) throw 'Could not launch $_url';
+  }
+
+  static String getSizeWithString(int n ){
+
+    if(n < 1000) return "${n}k";
+    if(n > 1000 && n < 1000 * 1000) return "${n / 1000}m";
+
+    return "${n / 1000 * 1000}g";
   }
 
 }
