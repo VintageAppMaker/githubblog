@@ -12,6 +12,15 @@ class Util {
       return sResult;
   }
 
+  static void extractLi(String s, Function onAdd){
+    var doc = parse(s);
+    if (doc.getElementsByTagName("a").length < 1) return;
+    doc.getElementsByTagName("a")!.forEach((element) {
+      onAdd(element.text, element.attributes["href"].toString());
+    });
+  }
+
+
   // youtube 썸네일
   static String? getYoutubeThumbnail(String videoUrl) {
     final Uri? uri = Uri.tryParse(videoUrl);

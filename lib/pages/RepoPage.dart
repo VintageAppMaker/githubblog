@@ -162,14 +162,14 @@ class RepoPageState extends State<RepoPage>{
         child: Stack(
           children: [
             //if (sAccount.length > 0) makeAccountInfo() else makeNotice(),
-            makeAccountInfo(),
+            buildAccountInfo(),
             if (bLoading) showProgress()
           ],
         ),
     );
   }
 
-  Column makeAccountInfo() {
+  Column buildAccountInfo() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -182,7 +182,7 @@ class RepoPageState extends State<RepoPage>{
             child: ListView.builder(
               controller: _scrollController,
               itemBuilder: (BuildContext, index) {
-                return makeItemCard(index);
+                return buildItemCard(index);
               },
               itemCount: lstCount,
               shrinkWrap: true,
@@ -194,7 +194,7 @@ class RepoPageState extends State<RepoPage>{
   }
 
   // Repo 카드
-  Widget makeItemCard(int index) {
+  Widget buildItemCard(int index) {
     if (display_lst == null)
       return Text(
         '자료없음',

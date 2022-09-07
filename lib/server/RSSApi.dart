@@ -20,4 +20,10 @@ class RSSApi{
     final sData = await dio.get('https://www.youtube.com/feeds/videos.xml?channel_id=UCQAo_pP9qcD2pZqd9EhnNLw');
     return AtomFeed.parse(sData.data);
   }
+
+  static Future<RssFeed> getGoogle() async {
+    var dio = Dio();
+    final sData = await dio.get('https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko');
+    return RssFeed.parse(sData.data);
+  }
 }
