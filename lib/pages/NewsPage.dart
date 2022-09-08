@@ -70,7 +70,7 @@ class NewsPageState extends State<NewsPage>{
           children: [
             Flexible(
               child: Text(sTitle, overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                  maxLines: 2,
                   softWrap: true,
                   style: TextStyle(color: Colors.black)),
             ),
@@ -108,7 +108,6 @@ class NewsPageState extends State<NewsPage>{
         items.add(RssGoogleItem(title: title, link: href));
       } );
 
-      print("title: =>${element.title}");
       lst.add(RssGoogle(title: element.title ?? "", link: "", items: items));
 
     });
@@ -119,7 +118,6 @@ class NewsPageState extends State<NewsPage>{
 
   @override
   Widget build(BuildContext context) {
-    var c = context.watch<GlobalState>();
     return buildRssInfo();
   }
 }

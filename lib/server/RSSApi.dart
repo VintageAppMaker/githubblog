@@ -26,4 +26,5 @@ class RSSApi{
     final sData = await dio.get('https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko');
     return RssFeed.parse(sData.data);
   }
+
 }
