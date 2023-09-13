@@ -1,0 +1,357 @@
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+<link rel="self" href="http://www.youtube.com/feeds/videos.xml?channel_id=UCQAo_pP9qcD2pZqd9EhnNLw"/>
+<id>yt:channel:</id>
+<yt:channelId/>
+<title>vintage appMaker</title>
+<link rel="alternate" href="https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2013-06-12T07:02:51+00:00</published>
+<entry>
+<id>yt:video:BURRJx9qUSQ</id>
+<yt:videoId>BURRJx9qUSQ</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>누구나 쉬운산수(+-만 연습하기)</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=BURRJx9qUSQ"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2020-08-17T07:33:48+00:00</published>
+<updated>2023-06-07T20:49:37+00:00</updated>
+<media:group>
+<media:title>누구나 쉬운산수(+-만 연습하기)</media:title>
+<media:content url="https://www.youtube.com/v/BURRJx9qUSQ?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i3.ytimg.com/vi/BURRJx9qUSQ/hqdefault.jpg" width="480" height="360"/>
+<media:description>https://play.google.com/store/apps/details?id=com.psw.calcultrainer 마켓용 설명동영상</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="65"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:P3G-ke3kZUc</id>
+<yt:videoId>P3G-ke3kZUc</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[UI Automation] 윈도우 화면제어. with python</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=P3G-ke3kZUc"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2020-07-26T02:21:03+00:00</published>
+<updated>2023-06-07T17:10:17+00:00</updated>
+<media:group>
+<media:title>[UI Automation] 윈도우 화면제어. with python</media:title>
+<media:content url="https://www.youtube.com/v/P3G-ke3kZUc?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i1.ytimg.com/vi/P3G-ke3kZUc/hqdefault.jpg" width="480" height="360"/>
+<media:description>Microsoft의 UI Automation과 Python을 이용한 윈도우 프로그램 자동화(파이썬 오토메이션) RPA(Robotic Process Automation) - 파이썬용 오픈소스: https://github.com/yinkaisheng/Python-UIAutomation-for-Windows/blob/master/demos/automation_help_demo.py - 예제 레포지토리 https://github.com/VintageAppMaker/pyAuto</media:description>
+<media:community>
+<media:starRating count="3" average="5.00" min="1" max="5"/>
+<media:statistics views="1900"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:7BoMf5mcFGg</id>
+<yt:videoId>7BoMf5mcFGg</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[스크린공유] PC 화면공유를 제공하는 크롬앱 - webrtc desktop sharing</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=7BoMf5mcFGg"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-07-16T01:01:03+00:00</published>
+<updated>2023-07-23T09:47:49+00:00</updated>
+<media:group>
+<media:title>[스크린공유] PC 화면공유를 제공하는 크롬앱 - webrtc desktop sharing</media:title>
+<media:content url="https://www.youtube.com/v/7BoMf5mcFGg?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i4.ytimg.com/vi/7BoMf5mcFGg/hqdefault.jpg" width="480" height="360"/>
+<media:description>소규모 인원이 화면을 공유하며 회의나 강의 또는 스터드를 하기에 최적의 솔루션. 사용해보니 네트웍만 안정적이라면... 집에서 강사와 오프라인 강의처럼 소통이 가능할 듯.</media:description>
+<media:community>
+<media:starRating count="4" average="5.00" min="1" max="5"/>
+<media:statistics views="2369"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:_hRYkn8SX3s</id>
+<yt:videoId>_hRYkn8SX3s</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 25.] kotlinexport</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=_hRYkn8SX3s"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-09T00:49:00+00:00</published>
+<updated>2023-07-22T14:51:18+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 25.] kotlinexport</media:title>
+<media:content url="https://www.youtube.com/v/_hRYkn8SX3s?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i4.ytimg.com/vi/_hRYkn8SX3s/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="43"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:NBsBAJcb51Y</id>
+<yt:videoId>NBsBAJcb51Y</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 24.] javaimport</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=NBsBAJcb51Y"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-09T00:05:25+00:00</published>
+<updated>2023-07-22T10:24:03+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 24.] javaimport</media:title>
+<media:content url="https://www.youtube.com/v/NBsBAJcb51Y?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i3.ytimg.com/vi/NBsBAJcb51Y/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="29"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:qED9P4vS9aA</id>
+<yt:videoId>qED9P4vS9aA</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 23.] late, lazy</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=qED9P4vS9aA"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-08T06:58:19+00:00</published>
+<updated>2023-07-05T19:23:11+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 23.] late, lazy</media:title>
+<media:content url="https://www.youtube.com/v/qED9P4vS9aA?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i2.ytimg.com/vi/qED9P4vS9aA/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="52"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:WVuITJP65rM</id>
+<yt:videoId>WVuITJP65rM</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[kotlin live coding 22.] properties</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=WVuITJP65rM"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-08T06:23:23+00:00</published>
+<updated>2023-06-08T01:35:00+00:00</updated>
+<media:group>
+<media:title>[kotlin live coding 22.] properties</media:title>
+<media:content url="https://www.youtube.com/v/WVuITJP65rM?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i4.ytimg.com/vi/WVuITJP65rM/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="23"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:DUH-9xB2whM</id>
+<yt:videoId>DUH-9xB2whM</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 21.] closure2</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=DUH-9xB2whM"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-08T06:10:22+00:00</published>
+<updated>2023-06-14T17:13:42+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 21.] closure2</media:title>
+<media:content url="https://www.youtube.com/v/DUH-9xB2whM?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i1.ytimg.com/vi/DUH-9xB2whM/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="14"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:kBbSo98aIe0</id>
+<yt:videoId>kBbSo98aIe0</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 20.] closure</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=kBbSo98aIe0"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-08T00:51:55+00:00</published>
+<updated>2023-06-08T18:57:13+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 20.] closure</media:title>
+<media:content url="https://www.youtube.com/v/kBbSo98aIe0?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i4.ytimg.com/vi/kBbSo98aIe0/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="46"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:6tBYeodOYes</id>
+<yt:videoId>6tBYeodOYes</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 19.] 확장함수</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=6tBYeodOYes"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-08T00:22:20+00:00</published>
+<updated>2023-07-02T10:43:36+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 19.] 확장함수</media:title>
+<media:content url="https://www.youtube.com/v/6tBYeodOYes?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i3.ytimg.com/vi/6tBYeodOYes/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="99"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:bavVZ5efCVQ</id>
+<yt:videoId>bavVZ5efCVQ</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 18.] let, appy, run</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=bavVZ5efCVQ"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-07T23:58:40+00:00</published>
+<updated>2023-06-12T06:10:50+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 18.] let, appy, run</media:title>
+<media:content url="https://www.youtube.com/v/bavVZ5efCVQ?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i3.ytimg.com/vi/bavVZ5efCVQ/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="1" average="5.00" min="1" max="5"/>
+<media:statistics views="73"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:zSspB6ml3iQ</id>
+<yt:videoId>zSspB6ml3iQ</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 17.] lambdas</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=zSspB6ml3iQ"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-06T10:47:04+00:00</published>
+<updated>2023-06-15T08:09:59+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 17.] lambdas</media:title>
+<media:content url="https://www.youtube.com/v/zSspB6ml3iQ?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i3.ytimg.com/vi/zSspB6ml3iQ/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="31"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:xF-Xki8L4ng</id>
+<yt:videoId>xF-Xki8L4ng</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 16.]object</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=xF-Xki8L4ng"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-06T04:20:11+00:00</published>
+<updated>2023-06-11T12:58:11+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 16.]object</media:title>
+<media:content url="https://www.youtube.com/v/xF-Xki8L4ng?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i1.ytimg.com/vi/xF-Xki8L4ng/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="33"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:0dS8QsMYQHk</id>
+<yt:videoId>0dS8QsMYQHk</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 15.] interface abstract static</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=0dS8QsMYQHk"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-06T04:14:41+00:00</published>
+<updated>2023-06-08T17:33:01+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 15.] interface abstract static</media:title>
+<media:content url="https://www.youtube.com/v/0dS8QsMYQHk?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i1.ytimg.com/vi/0dS8QsMYQHk/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="1" average="5.00" min="1" max="5"/>
+<media:statistics views="39"/>
+</media:community>
+</media:group>
+</entry>
+<entry>
+<id>yt:video:kzsNrval2Vc</id>
+<yt:videoId>kzsNrval2Vc</yt:videoId>
+<yt:channelId>UCQAo_pP9qcD2pZqd9EhnNLw</yt:channelId>
+<title>[ kotlin live coding 14.] 다형성 - polymorphism</title>
+<link rel="alternate" href="https://www.youtube.com/watch?v=kzsNrval2Vc"/>
+<author>
+<name>vintage appMaker</name>
+<uri>https://www.youtube.com/channel/UCQAo_pP9qcD2pZqd9EhnNLw</uri>
+</author>
+<published>2018-02-06T04:06:53+00:00</published>
+<updated>2023-06-13T12:53:06+00:00</updated>
+<media:group>
+<media:title>[ kotlin live coding 14.] 다형성 - polymorphism</media:title>
+<media:content url="https://www.youtube.com/v/kzsNrval2Vc?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+<media:thumbnail url="https://i4.ytimg.com/vi/kzsNrval2Vc/hqdefault.jpg" width="480" height="360"/>
+<media:description>github: https://github.com/adsloader/FirstKotlin/ 구글 앱스토어: https://play.google.com/store/apps/details?id=com.psw.appbook.kotlin&hl=ko</media:description>
+<media:community>
+<media:starRating count="0" average="0.00" min="1" max="5"/>
+<media:statistics views="43"/>
+</media:community>
+</media:group>
+</entry>
+</feed>
